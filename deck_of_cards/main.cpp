@@ -1,22 +1,3 @@
-/****************************************************************************
- * Project number: Final Project
- *
- * Programmer: Jasmine Norman
- *
- * Due Date: 4/17/17
- *
- * EGRE 246 Spring 2017
- *
- * Pledge: I have neither given nor received unauthorized aid on the program.
- *
- * Description:
- *
- * Input:
- *
- * Output:
- *
- ***************************************************************************/
-
 #include <iostream>
 #include <fstream>
 #include "deck.hpp"
