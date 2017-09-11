@@ -1,32 +1,88 @@
-#include "stm32l476xx.h"
-#include "LED.h"
-#include "SysTimer.h"
+#include <stdio.h>
+//#include "stm32l476xx.h"
+//#include "LED.h"
+//#include "SysTimer.h"
 
 // function declarations
 void print_array(int arr[]);
 void side2side(int arr[]);
-void array_to_GPIO(int arr[]);
-void config_HSI();
-void config_GPIOS();
+//void System_Clock_Init(void);
+//void config_GPIOS ();
+//void config_HSI ();
 
-int main(void){
+int main () {
+	/*
 	LED_Init();
 	SysTick_Init();
 	config_HSI();
 	config_GPIOS();
-		
+	*/
 	int arr[10] = {1, 1, 1, 1, 0, 0, 0, 0, 0, 0};
-	int cycle = 0;
-	int num_cycles = 10;
-	while (cycle < num_cycles){
+	/* set pins PA0-PA3 on
+	GPIOA->BSRR[0] = 1;
+	GPIOA->BSRR[1] = 1;
+	GPIOA->BSRR[2] = 1;
+	GPIOA->BSRR[3] = 1;
+	*/
+	int i = 0;
+	while (i < 3){
 	    side2side(arr);
-	    cycle++;
+	    i++;
 	}
-	array_to_GPIO(arr);
 }
 
 // function definitions
 
+void side2side (int arr[]){
+	int i = 0;
+	int j = 9;
+	while (i < 10) {
+    	while (i < 6){
+    	    print_array(arr);
+    		arr[i] = 0;
+    		arr[i+4] = 1;
+    		/*
+			if (i < 4) {
+				GPIOA->BRR[i] = 1;
+				GPIOA->BSRR[i+4] = 1;
+			}
+			else {	turn PE10-15 on/off
+				i += 6;
+				GPIOE->BRR[i] = 1;
+				GPIOE->BSRR[i+4] = 1;
+			}
+    		*/
+    		i++;
+    	}
+    	while (i < 12){
+    	    print_array(arr);
+            arr[j] = 0;
+            arr[j-4] = 1;
+    		/*
+			if (i < 4) {
+				GPIOA->BRR[j] = 1;
+				GPIOA->BSRR[j-4] = 1;
+			}
+			else {
+				j += 6;
+				GPIOE->BRR[j] = 1;
+				GPIOE->BSRR[j-4] = 1;
+			}
+    		*/
+            i++;
+            j--;
+    	}
+	}
+}
+
+void print_array(int arr[]) {
+	for (int i = 0; i < 10; i++){
+
+		printf ("%d ", arr[i]);
+	}
+	printf ("\n");
+}
+/*
 void config_HSI () {
 	// Enable High Speed Internal Clock (HSI = 16 MHz)
 	RCC->CR |= ((uint32_t)RCC_CR_HSION);
@@ -88,45 +144,4 @@ void System_Clock_Init(void){
 	// Enable MSI and wait until it's ready	
 	while ((RCC->CR & RCC_CR_MSIRDY) == 0); 		
 }
-
-void side2side (int arr[]){
-	int i = 0;
-	int j = 9;
-	while (i < 10) {
-    	while (i < 6){
-    	    array_to_GPIO(arr);
-    		arr[i] = 0; // 
-    		arr[i+4] = 1;
-    		i++;
-    	}
-    	while (i < 12){
-    	    array_to_GPIO(arr);
-            arr[j] = 0;
-            arr[j-4] = 1;
-            i++;
-            j--;
-    	}
-	}
-}
-
-void array_to_GPIO(int arr[]){
-    for (int i = 0; i < 10; i++){
-        if (i < 4 ){
-            if (arr[i] == 0){
-                GPIOA->BRR[i] = 1;
-            }
-            else {
-                GPIOA->BSRR[i] = 1;
-            }
-        }
-        if (i > 3) {
-            int j = i+6;
-            if (arr[i] == 0){
-                GPIOE->BRR[j] = 1;
-            }
-            else {
-                GPIOE->BSRR[j] = 1;
-            }
-        }
-    }
-}
+*/
