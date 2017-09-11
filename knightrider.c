@@ -1,47 +1,35 @@
 #include <stdio.h>
-//#include "stm32l476xx.h"
-//#include "LED.h"
-//#include "SysTimer.h"
+#include "stm32l476xx.h"
+#include "LED.h"
+#include "SysTimer.h"
 
 // function declarations
-void print_array(int arr[]);
-void side2side(int arr[]);
-//void System_Clock_Init(void);
-//void config_GPIOS ();
-//void config_HSI ();
+void side2side();
+void System_Clock_Init(void);
+void config_GPIOS ();
+void config_HSI ();
 
 int main () {
-	/*
 	LED_Init();
 	SysTick_Init();
 	config_HSI();
 	config_GPIOS();
-	*/
-	int arr[10] = {1, 1, 1, 1, 0, 0, 0, 0, 0, 0};
-	/* set pins PA0-PA3 on
 	GPIOA->BSRR[0] = 1;
 	GPIOA->BSRR[1] = 1;
 	GPIOA->BSRR[2] = 1;
 	GPIOA->BSRR[3] = 1;
-	*/
-	int i = 0;
-	while (i < 3){
-	    side2side(arr);
-	    i++;
+	for (int i = 0; i < 20; i++){
+		side2side();
 	}
 }
 
 // function definitions
 
-void side2side (int arr[]){
+void side2side (){
 	int i = 0;
 	int j = 9;
 	while (i < 10) {
     	while (i < 6){
-    	    print_array(arr);
-    		arr[i] = 0;
-    		arr[i+4] = 1;
-    		/*
 			if (i < 4) {
 				GPIOA->BRR[i] = 1;
 				GPIOA->BSRR[i+4] = 1;
@@ -51,14 +39,9 @@ void side2side (int arr[]){
 				GPIOE->BRR[i] = 1;
 				GPIOE->BSRR[i+4] = 1;
 			}
-    		*/
     		i++;
     	}
     	while (i < 12){
-    	    print_array(arr);
-            arr[j] = 0;
-            arr[j-4] = 1;
-    		/*
 			if (i < 4) {
 				GPIOA->BRR[j] = 1;
 				GPIOA->BSRR[j-4] = 1;
@@ -68,21 +51,12 @@ void side2side (int arr[]){
 				GPIOE->BRR[j] = 1;
 				GPIOE->BSRR[j-4] = 1;
 			}
-    		*/
             i++;
             j--;
     	}
 	}
 }
 
-void print_array(int arr[]) {
-	for (int i = 0; i < 10; i++){
-
-		printf ("%d ", arr[i]);
-	}
-	printf ("\n");
-}
-/*
 void config_HSI () {
 	// Enable High Speed Internal Clock (HSI = 16 MHz)
 	RCC->CR |= ((uint32_t)RCC_CR_HSION);
@@ -144,4 +118,3 @@ void System_Clock_Init(void){
 	// Enable MSI and wait until it's ready	
 	while ((RCC->CR & RCC_CR_MSIRDY) == 0); 		
 }
-*/
