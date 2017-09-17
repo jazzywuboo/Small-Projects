@@ -3,6 +3,7 @@
 #include "deck.hpp"
 #include "player.hpp"
 
+// program to play a game of cards (variant of blackjack)
 
 using namespace std;
 
