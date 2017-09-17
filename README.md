@@ -1,2 +1,2 @@
-# Small-Projects
-Small projects, mostly completed for school.
+# assignments
+assignments completed for classes.
