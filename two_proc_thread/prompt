@@ -1,0 +1,17 @@
+1) First, you need to implement the function print_string_by_character(). (20 points).
+2) In the main program, you need to add your code to allocate some memory space from the heap for the
+character to construct the letters in the string.
+In case of the two-threaded program, you need to assign the specified character with “*” and print the
+string “ECE” by calling the function print_string_by_character() in the thread 1 first, and wait 10
+seconds to print the initial of your own name by calling the function print_string_by_character().
+Meanwhile you need to change the specified character to “#” in the thread 2 after waiting 3 seconds
+from the start of this thread, and print the string of “531” by calling the function
+print_string_by_character() (35 points).
+In case of the two-process program, you need to assign the specified character with “*” and print a
+string “ECE” by calling the function print_string_by_character() in the child process first, and wait 10
+seconds to print the initial of your own name. Meanwhile you need to change the specified character
+2
+to “#” in the parent process after waiting 3 seconds from the start of this process, and print the string
+“531” by calling the function print_string_by_character() (35 points).
+3) Last, you need to compare the results in the two-threaded program and the two-process program, and
+draw your conclusions (10 points).
