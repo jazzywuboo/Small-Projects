@@ -1,0 +1,23 @@
+Two-threaded program vs. two-process program:
+Many of the lines of code in the two-threaded program and the twoprocess
+programs are the same, but their respective implementations
+cause the programs to run differently, mainly due to the differences
+in shared memory.
+For the two-threaded program, each thread has its own stack, but the
+threads share the heap. This causes the specified_character to be
+redefined when the call to print initials occurs; instead of initials
+being printed with asterisks, they are printed with pound symbols.
+For the two-process program, each process has its own copy of the
+heap, code and stack, so the specified_character variable is never
+shared between them. This means that the parent and child processes
+are able to print their strings with the expected symbols.
+The two-process program exhibits a different unexpected (from a
+sequential programming perspective) behavior from that of the twothreaded
+program. While the parent process is in sleep, the child
+process completes execution and exits the program. This causes the
+last line of the parent process, print intials, to never execute. To
+fix this, one can decrease the value of the call to sleep in the
+parent function to a number less than 3, so that this executes before
+the child process begins. Interestingly, if 3 is used, the parent and
+child proceses attempt to print the intials and the "531" at the same
+time, and a convoluted output is obtained.
